@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   return (
@@ -11,9 +12,9 @@ const Header = () => {
           iusto vero, praesentium aliquid numquam assumenda! Nam nisi
           exercitationem id repellat quae.
         </p>
-        <a href="/articles" className="btn btn-primary">
+        <Link to="/articles" className="btn btn-primary">
           Voir les articles
-        </a>
+        </Link>
       </div>
     </section>
   );
