@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 class Edit extends Component {
   state = {
@@ -10,7 +11,8 @@ class Edit extends Component {
       cover_image: ""
     },
     messageSuccess: false,
-    time: 5
+    time: 5,
+    redirect: null
   };
 
   getArticle = () => {
@@ -45,7 +47,7 @@ class Edit extends Component {
       this.setState({ time: this.state.time - 1 });
       if (this.state.time === 0) {
         clearInterval(displayTime);
-        window.location = "/articles";
+        this.setState({ redirect: "/articles" });
       }
     }, 1000);
   };
@@ -54,7 +56,10 @@ class Edit extends Component {
     this.getArticle();
   }
   render() {
-    const { article, messageSuccess, time } = this.state;
+    const { article, messageSuccess, time, redirect } = this.state;
+    if (redirect) {
+      return <Redirect to={redirect} />;
+    }
     return (
       <React.Fragment>
         <section id="header-edit-article" className="jumbotron">
