@@ -1,9 +1,5 @@
 const con = require("../config/db");
 const today = new Date();
-const formatDate = today
-  .toISOString()
-  .slice(0, 19)
-  .replace("T", " ");
 
 function Model(options) {
   this.tableName = options.tableName;
