@@ -53,15 +53,21 @@ const postLogin = (req, res) => {
         if(!user) {
             return res.status(401).json({ message: info });
         } else {
-            req.logIn(user, error => {
+            req.login(user, error => {
                 if(error) return res.status(500).json({ message: "Session save went bad." });
-                res.status(200).json({ message: "Authenticated...", user });
+                res.status(200).json({ message: "Authenticated...", user, session: req.user[0].id });
             })
         }
     })(req, res);
 };
 
+const logout = (req, res) => {
+    req.logout();
+    res.status(201).json({ success: "You are logged out !" });
+};
+
 module.exports = {
     newUser,
-    postLogin
+    postLogin,
+    logout
 };
