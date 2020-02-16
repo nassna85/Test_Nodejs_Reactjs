@@ -38,7 +38,7 @@ class Register extends Component {
                         this.setState({ time: this.state.time - 1 });
                         if (this.state.time === 0) {
                             clearInterval(timeRedirect);
-                            this.setState({ redirect: "/" });
+                            this.setState({ redirect: "/signin" });
                         }
                     }, 1000)
                 }

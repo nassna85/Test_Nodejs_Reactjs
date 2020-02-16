@@ -8,9 +8,10 @@ import New from "./components/articles/New";
 import showArticle from "./components/articles/showArticle";
 import Edit from "./components/articles/Edit";
 import Register from "./components/registration/Register";
+import Login from "./components/Login/Login";
 import Footer from "./components/footer/Footer";
 
-function App(props) {
+function App() {
   return (
     <Router>
       <Navigation />
@@ -21,6 +22,7 @@ function App(props) {
         <Route path="/articles/:id" component={showArticle} />
         <Route path="/articles" component={Articles} />
           <Route path="/signup" component={Register} />
+          <Route path="/signin" component={Login} />
       </Switch>
       <Footer />
     </Router>
