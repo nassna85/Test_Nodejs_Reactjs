@@ -4,10 +4,12 @@ require("dotenv").config();
 const session = require('express-session');
 const passport = require('passport');
 const initialize  = require('./services/passport');
+const cors = require('cors');
 const articlesRouter = require("./routes/articles");
 const usersRouter = require('./routes/users');
 
 //Middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

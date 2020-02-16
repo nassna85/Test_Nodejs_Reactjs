@@ -12,15 +12,11 @@ const newUser = (req, res) => {
         if(error) {
             return res.status(500).json({ message: "Error Server..." });
         }
-        let findEmail = false;
-        users.forEach(user => {
-            if(user.email === dataUser.email) {
-                findEmail = true;
+        user.findByEmail(dataUser.email, (error, result) => {
+            if(error) throw error;
+            if(result.length) {
+                return res.status(400).json({ message: "Cet email existe déjà..." });
             }
-        });
-        if(findEmail) {
-            return res.status(400).json({ message: "Cet email existe déjà..." });
-        } else {
             if(dataUser.password !== dataUser.cpassword) {
                 return res.status(400).json({ message: "Vos deux mots de passe doivent être identique !" });
             }
@@ -42,7 +38,7 @@ const newUser = (req, res) => {
             }).catch(err => {
                 return res.status(500).json({ message: err });
             });
-        }
+        });
     });
 
 };
@@ -55,7 +51,8 @@ const postLogin = (req, res) => {
         } else {
             req.login(user, error => {
                 if(error) return res.status(500).json({ message: "Session save went bad." });
-                res.status(200).json({ message: "Authenticated...", user, session: req.user[0].id });
+                //console.log(req.isAuthenticated());
+                res.status(200).json({ message: "Authenticated...", user });
             })
         }
     })(req, res);
